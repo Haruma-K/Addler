@@ -39,7 +39,7 @@ In addition, there is a preloader that preloads resources and get them synchrono
   <img width=500 src="https://user-images.githubusercontent.com/47441314/107220479-b9fc0d80-6a55-11eb-81db-6cd7b855f4fb.png" alt="Object Pooling">
 </p>
 
-Naturally, these lifetimes can also be bound to GameObjects and other objects.
+Of course, these lifetimes can also be bound to GameObjects and other objects.
 
 Addler is a library that uses these features to properly manage the lifetime of resources in Addressable Asset System.
 
