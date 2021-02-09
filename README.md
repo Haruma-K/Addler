@@ -2,7 +2,7 @@
 Preloading, Pooling, Lifetime Management System for Unity Addressable Asset System.
 
 ## Overview
-In the Addressable asset system, loaded resources must be explicitly released when they are no longer needed.
+In the Addressable asset system, you must explicitly release loaded resources when they are no longer needed.
 
 ```cs
 // Load.
@@ -27,7 +27,7 @@ Addressables.LoadAssetAsync<GameObject>("BarPrefab").BindTo(fooObj);
 
 In the above code, the resource is released as soon as the `fooObj` is destroyed.
 
-This way, you don't have to worry about forgetting to release it.
+Thus, you don't have to worry about forgetting to release it.
 
 <p align="center">
   <img width=500 src="https://user-images.githubusercontent.com/47441314/107219809-f0855880-6a54-11eb-9947-87e6948e4d60.png" alt="Lifetime Binding">
@@ -79,7 +79,7 @@ var handle = Addressables.LoadAssetAsync<GameObject>("FooPrefab");
 await handle.Task;
 ```
 
-However, in reality, in most cases you will want to load resources in advance at the "load screen" and load them synchronously during the game.
+However, in reality, in most cases you will want to load resources in advance at the "Loading Screen" and load them synchronously during the game.
 The preloader does this.
 
 #### How to use Preloader
@@ -89,10 +89,10 @@ To use the preloader, instantiate the `AddressablesPreloader` class.
 // Create the preloader.
 var preloader = new AddressablesPreloader();
 
-// Preload assets.
+// Preload resources.
 await preloader.PreloadAsync("FooPrefab", "BarPrefab");
 
-// Get preloaded assets synchronously.
+// Get preloaded resourcdes synchronously.
 var fooPrefab = preloader.Get<GameObject>("FooPrefab");
 var barPrefab = preloader.Get<GameObject>("BarPrefab");
 
@@ -119,7 +119,7 @@ All resources will be released when the preloader lifetime expires.
 Unity games often use GameObjects instantiated from prefabs.
 However, instantiating and destroying is expensive, and if done too often, it can take time to process.
 
-Let's consider a case where many instances of the same Prefab are created, like bullets.
+Let's consider a case where many instances of the same prefab are created, like bullets.
 In such a case, we can reduce the processing load by using several instances created in advance.
 This is called object pooling.
 
@@ -175,7 +175,7 @@ When the lifetime of the object pool expires, all instances will be destroyed an
 
 ## Bind to Non-GameObject
 You can also bind the lifetime to a non-GameObject.
-To bind it to a non-GameObject, create a class that implements IEventDispatcher and pass it to BindTo().
+To bind it to a non-GameObject, create a class that implements IEventDispatcher and pass it to `BindTo()`.
 
 Addler has a class for binding the lifetime to the end timing of ParticleSystem.
 As an example implementation of IEventDispatcher, this class is shown below.
