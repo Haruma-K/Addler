@@ -13,7 +13,7 @@ await handle.Task;
 Addressables.Release(handle);
 ```
 
-If you forget this release process, it will cause memory leaks and become a technical debt that will eventually lead to serious problems.
+If you forget this, it will cause memory leaks and become a technical debt that will eventually lead to serious problems.
 
 Addler simplifies memory management by binding resource lifetimes to GameObjects and other resources.
 
@@ -27,13 +27,13 @@ Addressables.LoadAssetAsync<GameObject>("BarPrefab").BindTo(fooObj);
 
 In the above code, the resource is released as soon as the `fooObj` is destroyed.
 
-If you bind the lifetime of a resource to a GameObject at load time like this, you don't have to worry about forgetting to release it.
+This way, you don't have to worry about forgetting to release it.
 
 <p align="center">
   <img width=500 src="https://user-images.githubusercontent.com/47441314/107219809-f0855880-6a54-11eb-9947-87e6948e4d60.png" alt="Lifetime Binding">
 </p>
 
-In addition, there is a preloader that preloads resources and get them synchronously, and also object pooling to reuse Prefab instances.
+In addition, there is a preloader that preloads resources and get them synchronously, and also object pooling to reuse prefab instances.
 
 <p align="center">
   <img width=500 src="https://user-images.githubusercontent.com/47441314/107220479-b9fc0d80-6a55-11eb-81db-6cd7b855f4fb.png" alt="Object Pooling">
@@ -41,7 +41,7 @@ In addition, there is a preloader that preloads resources and get them synchrono
 
 Of course, these lifetimes can also be bound to GameObjects and other objects.
 
-Addler is a library that uses these features to properly manage the lifetime of resources in Addressable Asset System.
+In this way, Addler allows you to properly manage the lifetime of your Addressable Asset System resources.
 
 ## Install
 Open Packages/manifest.json and add the following to the dependencies block.
