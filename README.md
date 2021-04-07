@@ -2,7 +2,7 @@
 Preloading, Pooling, Lifetime Management System for Unity Addressable Asset System.
 
 ## Overview
-In the Addressable asset system, you must explicitly release loaded resources when they are no longer needed.
+In the Addressable Asset System, you must explicitly release loaded resources when they are no longer needed.
 
 ```cs
 // Load.
