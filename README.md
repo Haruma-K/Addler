@@ -44,6 +44,18 @@ Of course, these lifetimes can also be bound to GameObjects and other objects.
 In this way, Addler allows you to properly manage the lifetime of your Addressable Asset System resources.
 
 ## Install
+1. Open the Package Manager
+2. "+" button > Add package from git URL
+3. Enter the following
+    * https://github.com/Haruma-K/Addler.git?path=/Packages/com.harumak.addler
+
+<p align="center">
+  <img width=500 src="https://user-images.githubusercontent.com/47441314/113792801-c1077980-9781-11eb-8770-210999a25c9a.png" alt="Package Manager">
+</p>
+
+
+or
+
 Open Packages/manifest.json and add the following to the dependencies block.
 
 ```json
@@ -53,6 +65,9 @@ Open Packages/manifest.json and add the following to the dependencies block.
     }
 }
 ```
+
+If you want to set the target version, specify it as follow.
+* https://github.com/Haruma-K/Addler.git?path=/Packages/com.harumak.addler#0.1.0
 
 ## Lifetime Binding
 To bind the lifetime of a resource loaded by Addressable, write `BindTo()` after `Addressables.LoadAsssetAsync()`.
