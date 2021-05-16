@@ -43,7 +43,12 @@ Of course, these lifetimes can also be bound to GameObjects and other objects.
 
 In this way, Addler allows you to properly manage the lifetime of your Addressable Asset System resources.
 
-## Install
+## Setup
+
+#### Requirement
+Unity 2019.3 or higher.
+
+#### Install
 1. Open the Package Manager from Window > Package Manager
 2. "+" button > Add package from git URL
 3. Enter the following
@@ -65,6 +70,13 @@ Or, open Packages/manifest.json and add the following to the dependencies block.
 
 If you want to set the target version, specify it like follow.
 * https://github.com/Haruma-K/Addler.git?path=/Packages/com.harumak.addler#0.1.0
+
+#### License
+This software is released under the MIT License.  
+You are free to use it within the scope of the license.  
+However, the following copyright and license notices are required for use.
+
+https://github.com/Haruma-K/Addler/blob/master/LICENSE.md
 
 ## Lifetime Binding
 To bind the lifetime of a resource loaded by Addressable, write `BindTo()` after `Addressables.LoadAsssetAsync()`.
@@ -225,6 +237,3 @@ namespace Addler.Runtime.Foundation.EventDispatcher
     }
 }
 ```
-
-## Lisence
-This software is released under the MIT License, see LICENSE.md.
