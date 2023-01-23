@@ -32,7 +32,6 @@ namespace Addler.Runtime.Core.LifetimeBinding
             _isAliveAtLastFrame = isAlive;
         }
 
-
         event Action IReleaseEvent.Dispatched
         {
             add => ReleasedInternal += value;
