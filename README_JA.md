@@ -114,7 +114,7 @@ Addressables.LoadAssetAsync<GameObject>("BarPrefab").BindTo(fooObj);
 
 ## ライフタイムバインディング
 
-Addler の基本的な機能として、リソースのライフタイムを **GameObject** などと紐づけて、確実かつ自動的に解放処理を行うライフタイムバインディングがあります。
+**Addler** の基本的な機能として、リソースのライフタイムを **GameObject** などと紐づけて、確実かつ自動的に解放処理を行うライフタイムバインディングがあります。
 
 ### GameObjectにバインディングする
 **Addressable** で読み込んだリソースのライフタイムを **GameObject** と紐づけるには、以下のように`Addressables.LoadAsssetAsync()`の後ろに`BindTo()`と記述します。
@@ -184,7 +184,7 @@ public sealed class ParticleSystemBasedReleaseEvent : MonoBehaviour, IReleaseEve
 Addressables は基本的にリソースを非同期的にロードします。
 
 ```cs
-//　Asynchronous loading
+// Asynchronous loading
 var handle = Addressables.LoadAssetAsync<GameObject>("fooPrefab");
 await handle.Task;
 ```
@@ -237,10 +237,10 @@ public sealed class Example : MonoBehaviour
 }
 ```
 
-`AddressablePreloader.PreloadKey/PreloadKeys`を呼ぶと引数に渡したキーが指すリソースを全てロードします。  
-`AddressablesPreloader.GetAsset` メソッドを使うとプリロードしたリソースを同期的に取得できます。
+`AddressablePreloader.PreloadKey()/PreloadKeys()`を呼ぶと引数に渡したキーが指すリソースを全てロードします。  
+`AddressablesPreloader.GetAsset()` メソッドを使うとプリロードしたリソースを同期的に取得できます。
 
-プリローダを使用し終わったら`AddressablePool.Dispose`を呼ぶことですべてのリソースがリリースされます。
+プリローダを使用し終わったら`AddressablePool.Dispose()`を呼ぶことですべてのリソースがリリースされます。
 
 ### プリローダのライフタイムをバインディングする
 プリローダのライフタイムをバインドすることもできます。
@@ -275,7 +275,7 @@ Unity のゲームでは Prefab をインスタンス化した GameObject が多
   <img width=80% src="Documentation/concept_02.png" alt="Pooling">
 </p>
 
-Addler には Addressable アセットシステムでオブジェクトプーリングを扱うための機能が実装されています。
+**Addler** には Addressable アセットシステムでオブジェクトプーリングを扱うための機能が実装されています。
 
 ### オブジェクトプーリングの使い方
 オブジェクトプールは`AddressablePool`クラスにより行います。  
@@ -291,7 +291,7 @@ public sealed class Example : MonoBehaviour
 {
     private IEnumerator PoolExample()
     {
-        // Create a new pool.
+        // Create a new pool with key of the GameObject.
         var pool = new AddressablePool("fooPrefab");
 
         // Create instances in the pool.

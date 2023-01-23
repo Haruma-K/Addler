@@ -45,7 +45,7 @@ var handle = Addressables.LoadAssetAsync<GameObject>("FooPrefab");
 await handle.Task;
 
 // Release.
-Addressables.Release(handle)[README_JA.md](README_JA.md);
+Addressables.Release(handle);
 ```
 
 If you forget to release, it can cause memory leaks and serious problems such as application crashes.
@@ -68,7 +68,7 @@ In the above code, the resource is released as soon as the **fooObj** is destroy
   <img width=80% src="Documentation/concept_01.png" alt="Lifetime Binding">
 </p>
 
-Addler also provides Preloading feature that preloads resources and gets them synchronously, and Object Pooling feature that pools prefab instances and uses them.
+**Addler** also provides Preloading feature that preloads resources and gets them synchronously, and Object Pooling feature that pools prefab instances and uses them.
 
 <p align="center">
   <img width=80% src="Documentation/concept_02.png" alt="Pooling">
@@ -180,7 +180,7 @@ public sealed class ParticleSystemBasedReleaseEvent : MonoBehaviour, IReleaseEve
 In Addressable Asset System, resources are loaded asynchronously.
 
 ```cs
-//　Asynchronous loading
+// Asynchronous loading
 var handle = Addressables.LoadAssetAsync<GameObject>("fooPrefab");
 await handle.Task;
 ```
@@ -233,10 +233,10 @@ public sealed class Example : MonoBehaviour
 }
 ```
 
-You can preload resources of the keys in the argument by calling `AddressablePreloader.PreloadKey/PreloadKeys`.
-And you can get the preloaded resources synchronously by `AddressablesPreloader.GetAsset` method.
+You can preload resources of the keys in the argument by calling `AddressablePreloader.PreloadKey()/PreloadKeys()`.
+And you can get the preloaded resources synchronously by `AddressablesPreloader.GetAsset()` method.
 
-And all resources are released by `AddressablePreloader.Dispose` method.
+And all resources are released by `AddressablePreloader.Dispose()` method.
 
 ### Use Preloader with Lifetime Binding
 You can also bind the lifetime of the preloader.
@@ -285,7 +285,7 @@ public sealed class Example : MonoBehaviour
 {
     private IEnumerator PoolExample()
     {
-        // Create a new pool.
+        // Create a new pool with key of the GameObject.
         var pool = new AddressablePool("fooPrefab");
 
         // Create instances in the pool.
