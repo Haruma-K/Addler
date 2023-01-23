@@ -4,20 +4,22 @@ namespace Development.Shared.Runtime.Scripts
 {
     public sealed class AssetPaths
     {
+        private const string PrefabExtension = ".prefab";
+        
         public const string BaseFolder = "Assets/Development/Shared/Runtime";
         public const string PrefabsFolder = BaseFolder + "/Prefabs";
 
-        public const string SphereRedPlastic = PrefabsFolder + "/" + Addresses.SphereRedPlastic + ".prefab";
-        public const string SphereGreenPlastic = PrefabsFolder + "/" + Addresses.SphereGreenPlastic + ".prefab";
-        public const string SphereBluePlastic = PrefabsFolder + "/" + Addresses.SphereBluePlastic + ".prefab";
-        public const string SphereYellowPlastic = PrefabsFolder + "/" + Addresses.SphereYellowPlastic + ".prefab";
-        public const string SphereCyanPlastic = PrefabsFolder + "/" + Addresses.SphereCyanPlastic + ".prefab";
+        public const string SphereRedPlastic = PrefabsFolder + "/" + Addresses.SphereRedPlastic + PrefabExtension;
+        public const string SphereGreenPlastic = PrefabsFolder + "/" + Addresses.SphereGreenPlastic + PrefabExtension;
+        public const string SphereBluePlastic = PrefabsFolder + "/" + Addresses.SphereBluePlastic + PrefabExtension;
+        public const string SphereYellowPlastic = PrefabsFolder + "/" + Addresses.SphereYellowPlastic + PrefabExtension;
+        public const string SphereCyanPlastic = PrefabsFolder + "/" + Addresses.SphereCyanPlastic + PrefabExtension;
 
-        public const string SphereRedMetal = PrefabsFolder + "/" + Addresses.SphereRedMetal + ".prefab";
-        public const string SphereGreenMetal = PrefabsFolder + "/" + Addresses.SphereGreenMetal + ".prefab";
-        public const string SphereBlueMetal = PrefabsFolder + "/" + Addresses.SphereBlueMetal + ".prefab";
-        public const string SphereYellowMetal = PrefabsFolder + "/" + Addresses.SphereYellowMetal + ".prefab";
-        public const string SphereCyanMetal = PrefabsFolder + "/" + Addresses.SphereCyanMetal + ".prefab";
+        public const string SphereRedMetal = PrefabsFolder + "/" + Addresses.SphereRedMetal + PrefabExtension;
+        public const string SphereGreenMetal = PrefabsFolder + "/" + Addresses.SphereGreenMetal + PrefabExtension;
+        public const string SphereBlueMetal = PrefabsFolder + "/" + Addresses.SphereBlueMetal + PrefabExtension;
+        public const string SphereYellowMetal = PrefabsFolder + "/" + Addresses.SphereYellowMetal + PrefabExtension;
+        public const string SphereCyanMetal = PrefabsFolder + "/" + Addresses.SphereCyanMetal + PrefabExtension;
 
         public static IEnumerable<string> EnumerateSpherePlastic()
         {

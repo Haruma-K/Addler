@@ -149,7 +149,7 @@ namespace Addler.Runtime.Core.Preloading
                 throw new InvalidOperationException(
                     $"The key {key} is not preloaded. Call {nameof(PreloadKey)}(s) first.");
 
-            var result = new List<TObject>();
+            var result = new List<TObject>(handles.Count);
             foreach (var handle in handles)
             {
                 if (!handle.IsDone)
