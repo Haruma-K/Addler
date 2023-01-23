@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sphere-RGB-PackTogether
+  m_EditorClassIdentifier: 
+  m_GroupName: Sphere-RGB-PackTogether
+  m_Data:
+    m_SerializedData: []
+  m_GUID: fe77a701e21934237bec6b2e5cecef4f
+  m_SerializeEntries:
+  - m_GUID: 45d6a86f595bd4dbfa36f58cb958a17f
+    m_Address: Sphere_Plastic_Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - plastic
+  - m_GUID: cd4b56b9e85ac4455a280da2e67f6d59
+    m_Address: Sphere_Plastic_Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - plastic
+  - m_GUID: d7b28796545ad4e97902248a2fd0b5c8
+    m_Address: Sphere_Plastic_Blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - plastic
+  - m_GUID: 298143554258c4b58a943c8610cb00fa
+    m_Address: Sphere_Metal_Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metal
+  - m_GUID: f331560db16a346dda9022d08643a232
+    m_Address: Sphere_Metal_Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metal
+  - m_GUID: 5a4570a3566a84023a6401e51ded40ac
+    m_Address: Sphere_Metal_Blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metal
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 956bfc1d6393e584c8d66db726a39c68, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3d070c238715f4686a8e8768ecbe8574, type: 2}
+    - {fileID: 11400000, guid: 7a1ac754f16f34e2da5aad87c8fd5f26, type: 2}

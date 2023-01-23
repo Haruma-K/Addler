@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sphere-CY-PackSeparately
+  m_EditorClassIdentifier: 
+  m_GroupName: Sphere-CY-PackSeparately
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b6ecc2eff605e4223938841f4e86db7f
+  m_SerializeEntries:
+  - m_GUID: 36d2e79aabc404d6b9e0976cdfab4525
+    m_Address: Sphere_Plastic_Cyan
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - plastic
+  - m_GUID: e175db0ba7a1543e788cb81b1a5a0802
+    m_Address: Sphere_Plastic_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - plastic
+  - m_GUID: fd036d6990dd442428ae68c0161ed0ef
+    m_Address: Sphere_Metal_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metal
+  - m_GUID: ce4224995da684b55b5935c78ab5b012
+    m_Address: Sphere_Metal_Cyan
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metal
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 956bfc1d6393e584c8d66db726a39c68, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 793515d0b8e3e4ba9b0cd38107985309, type: 2}
+    - {fileID: 11400000, guid: 1e80248f3fc254d458b0662041a3f8d1, type: 2}
