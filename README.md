@@ -11,6 +11,29 @@ Provides lifetime management system for loaded resources, object pooling system,
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details>
+<summary>Details</summary>
+
+- [Overview](#overview)
+- [Setup](#setup)
+  - [Requirement](#requirement)
+  - [Install](#install)
+- [Lifetime Binding](#lifetime-binding)
+  - [Bind to GameObject](#bind-to-gameobject)
+  - [Bind to non-GameObject](#bind-to-non-gameobject)
+- [Preloading](#preloading)
+  - [How to use Preloader](#how-to-use-preloader)
+  - [Use Preloader with Lifetime Binding](#use-preloader-with-lifetime-binding)
+  - [Limitations of Preloader](#limitations-of-preloader)
+- [Object Pooling](#object-pooling)
+  - [How to use Object Pooling](#how-to-use-object-pooling)
+  - [Use Object Pool with Lifetime Binding](#use-object-pool-with-lifetime-binding)
+- [Other](#other)
+  - [Disable Preloading / Object Pooling](#disable-preloading--object-pooling)
+  - [Use UniTask](#use-unitask)
+- [Licenses](#licenses)
+
+</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
