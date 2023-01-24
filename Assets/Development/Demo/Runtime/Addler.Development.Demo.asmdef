@@ -1,0 +1,20 @@
+{
+    "name": "Addler.Development.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba69d678322409e4b89c5c28d57cb2ac",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:478ce49f31697499ba298dbf2b1990ba",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

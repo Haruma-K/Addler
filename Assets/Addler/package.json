@@ -1,0 +1,16 @@
+{
+  "name": "com.harumak.addler",
+  "displayName": "Addler",
+  "version": "1.0.0",
+  "unity": "2020.3",
+  "license": "MIT",
+  "dependencies": {
+    "com.unity.addressables": "1.8.5"
+  },
+  "author": {
+    "name": "Haruki Yano",
+    "url": "https://github.com/Haruma-K"
+  },
+  "type": "tool",
+  "description": "Preloading, Pooling, Lifetime Management for Unity Addressable Asset System."
+}
