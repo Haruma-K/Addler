@@ -6,8 +6,8 @@ using Addler.Runtime.Core.Preloading;
 using Development.Shared.Runtime.Scripts;
 using Development.Tests.Runtime.Shared;
 using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.TestTools;
 
 namespace Development.Tests.Runtime.Preloading
@@ -25,8 +25,11 @@ namespace Development.Tests.Runtime.Preloading
             yield return preloader.PreloadKey<GameObject>(address);
             Assert.That(referenceCounter.ReferenceCount, Is.EqualTo(1));
             var prefab = preloader.GetAsset<GameObject>(address);
-            Assert.That(prefab, Is.EqualTo(AssetDatabase.LoadAssetAtPath<GameObject>(assetPath)));
+            var expectedPrefabHandle = Addressables.LoadAssetAsync<GameObject>(address);
+            yield return expectedPrefabHandle;
+            Assert.That(prefab, Is.EqualTo(expectedPrefabHandle.Result));
 
+            Addressables.Release(expectedPrefabHandle);
             preloader.Dispose();
 
             // The handle is completely discarded in the next frame so wait a frame.
@@ -62,12 +65,18 @@ namespace Development.Tests.Runtime.Preloading
             yield return preloader.PreloadKeys<GameObject>(addresses);
             Assert.That(referenceCounter1.ReferenceCount, Is.EqualTo(1));
             Assert.That(referenceCounter2.ReferenceCount, Is.EqualTo(1));
+            var expectedPrefabHandle1 = Addressables.LoadAssetAsync<GameObject>(address1);
+            var expectedPrefabHandle2 = Addressables.LoadAssetAsync<GameObject>(address2);
+            yield return expectedPrefabHandle1;
+            yield return expectedPrefabHandle2;
 
             var prefab1 = preloader.GetAsset<GameObject>(address1);
-            Assert.That(prefab1, Is.EqualTo(AssetDatabase.LoadAssetAtPath<GameObject>(assetPath1)));
+            Assert.That(prefab1, Is.EqualTo(expectedPrefabHandle1.Result));
             var prefab2 = preloader.GetAsset<GameObject>(address2);
-            Assert.That(prefab2, Is.EqualTo(AssetDatabase.LoadAssetAtPath<GameObject>(assetPath2)));
+            Assert.That(prefab2, Is.EqualTo(expectedPrefabHandle2.Result));
 
+            Addressables.Release(expectedPrefabHandle1);
+            Addressables.Release(expectedPrefabHandle2);
             preloader.Dispose();
 
             // The handle is completely discarded in the next frame so wait a frame.
@@ -89,12 +98,14 @@ namespace Development.Tests.Runtime.Preloading
                 Assert.That(referenceCounter.ReferenceCount, Is.EqualTo(1));
 
             var prefabs = preloader.GetAssets<GameObject>(label);
-            foreach (var assetPath in assetPaths)
-            {
-                var expected = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
-                Assert.That(prefabs.Contains(expected), Is.True);
-            }
+            var expectedPrefabsHandle = Addressables.LoadAssetsAsync<GameObject>(label, null);
+            yield return expectedPrefabsHandle;
+            var expectedPrefabs = expectedPrefabsHandle.Result;
 
+            foreach (var prefab in prefabs)
+                Assert.That(expectedPrefabs.Contains(prefab), Is.True);
+
+            Addressables.Release(expectedPrefabsHandle);
             preloader.Dispose();
 
             // The handle is completely discarded in the next frame so wait a frame.
