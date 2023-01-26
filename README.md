@@ -81,7 +81,8 @@ Thus, **Addler** is a library for proper memory management of resources in **Add
 ## Setup
 
 ### Requirement
-Unity 2020.3 or higher.
+* Unity 2020.3 or higher.
+* Addressables is installed.
 
 ### Install
 1. Open the Package Manager from Window > Package Manager

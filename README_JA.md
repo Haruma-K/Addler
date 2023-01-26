@@ -87,6 +87,7 @@ Addressables.LoadAssetAsync<GameObject>("BarPrefab").BindTo(fooObj);
 
 ### 要件
 - Unity 2020.3 以上
+- Addressables がインストールされていること
 
 ### インストール
 1. Window > Package ManagerからPackage Managerを開く
