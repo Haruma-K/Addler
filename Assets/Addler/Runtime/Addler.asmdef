@@ -1,24 +1,25 @@
 {
-    "name": "Addler",
-    "rootNamespace": "",
-    "references": [
-        "GUID:9e24947de15b9834991c9d8411ea37cf",
-        "GUID:84651a3751eca9349aac36a66bba901b",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.cysharp.unitask",
-            "expression": "",
-            "define": "ADDLER_UNITASK_SUPPORT"
-        }
-    ],
-    "noEngineReferences": false
+  "name": "Addler",
+  "rootNamespace": "",
+  "references": [
+    "GUID:9e24947de15b9834991c9d8411ea37cf",
+    "GUID:84651a3751eca9349aac36a66bba901b",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23",
+    "Unity.AddressablesManager"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.cysharp.unitask",
+      "expression": "",
+      "define": "ADDLER_UNITASK_SUPPORT"
+    }
+  ],
+  "noEngineReferences": false
 }

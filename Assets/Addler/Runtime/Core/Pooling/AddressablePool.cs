@@ -13,8 +13,8 @@ namespace Addler.Runtime.Core.Pooling
 {
     public sealed partial class AddressablePool : IDisposable
     {
-        private readonly Dictionary<string, PooledObject> _busyObjects = new Dictionary<string, PooledObject>();
-        private readonly Stack<GameObject> _usableObjects = new Stack<GameObject>();
+        private readonly Dictionary<string, PooledObject> _busyObjects = new();
+        private readonly Stack<GameObject> _usableObjects = new();
         private bool _isWarmingUp;
 
         public AddressablePool(string key) : this(key, $"{key}Pool")
@@ -31,15 +31,18 @@ namespace Addler.Runtime.Core.Pooling
             // If the parent GameObject is destroyed, the pool dispose itself.
             var releaseEvent = (IReleaseEvent)Parent.AddComponent<MonoBehaviourBasedReleaseEvent>();
 
+            releaseEvent.Dispatched += OnDispatch;
+            return;
+
             void OnDispatch()
             {
                 if (!IsDisposed)
+                {
                     Dispose();
+                }
 
                 releaseEvent.Dispatched -= OnDispatch;
             }
-
-            releaseEvent.Dispatched += OnDispatch;
         }
 
         /// <summary>
@@ -64,20 +67,28 @@ namespace Addler.Runtime.Core.Pooling
         public void Dispose()
         {
             if (IsDisposed)
+            {
                 return;
+            }
 
             foreach (var handle in _busyObjects.Values)
+            {
                 Addressables.ReleaseInstance(handle.Instance);
+            }
 
             foreach (var obj in _usableObjects)
+            {
                 Addressables.ReleaseInstance(obj);
+            }
 
             Capacity = 0;
             _busyObjects.Clear();
             _usableObjects.Clear();
 
             if (Parent != null && !Parent.Equals(null))
+            {
                 Object.Destroy(Parent);
+            }
 
             IsDisposed = true;
         }
@@ -90,58 +101,67 @@ namespace Addler.Runtime.Core.Pooling
         public IEnumerator Warmup(int capacity, IProgress<float> progress = null)
         {
             if (IsDisposed)
+            {
                 throw new ObjectDisposedException(GetType().Name);
+            }
 
             if (capacity <= 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(capacity));
+            }
 
             if (_isWarmingUp)
+            {
                 throw new InvalidOperationException(
                     $"This operation cannot be performed until the running {nameof(Warmup)} is complete.");
+            }
 
             _isWarmingUp = true;
             Capacity = capacity;
-            var diffCount = capacity - _busyObjects.Count - _usableObjects.Count;
-            if (diffCount >= 1)
+            int diffCount = capacity - _busyObjects.Count - _usableObjects.Count;
+            switch (diffCount)
             {
-                // Generate new instances.
-                var instantiateHandles = new List<AsyncOperationHandle>();
-                for (var i = 0; i < diffCount; i++)
+                case >= 1:
                 {
-                    var instantiateHandle = Addressables.InstantiateAsync(Key, Parent.transform);
-                    instantiateHandles.Add(instantiateHandle);
-                }
+                    // Generate new instances.
+                    var asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>(Key);
+                    while (!asyncOperationHandle.IsDone)
+                    {
+                        progress?.Report(asyncOperationHandle.PercentComplete);
+                        yield return null;
+                    }
 
-                var instantiateGroupHandle =
-                    Addressables.ResourceManager.CreateGenericGroupOperation(instantiateHandles);
-                while (!instantiateGroupHandle.IsDone)
+                    progress?.Report(1.0f);
+
+                    if (asyncOperationHandle.Status == AsyncOperationStatus.Failed)
+                    {
+                        ExceptionDispatchInfo.Capture(asyncOperationHandle.OperationException)
+                                             .Throw();
+                    }
+
+                    for (var i = 0; i < diffCount; i++)
+                    {
+                        var instance = GameObject.Instantiate(asyncOperationHandle.Result,
+                            Vector3.one * 1000, Quaternion.identity, Parent.transform);
+
+                        instance.SetActive(false);
+                        _usableObjects.Push(instance);
+                    }
+
+                    break;
+                }
+                case <= -1:
                 {
-                    progress?.Report(instantiateGroupHandle.PercentComplete);
-                    yield return null;
-                }
+                    // Remove unused objects
+                    for (int i = 0; i < -diffCount; i++)
+                    {
+                        var obj = _usableObjects.Pop();
+                        Addressables.ReleaseInstance(obj);
+                    }
 
-                progress?.Report(1.0f);
-                
-                if (instantiateGroupHandle.Status == AsyncOperationStatus.Failed)
-                    ExceptionDispatchInfo.Capture(instantiateGroupHandle.OperationException).Throw();
-
-                foreach (var handle in instantiateGroupHandle.Result)
-                {
-                    var instance = handle.Convert<GameObject>().Result;
-                    instance.SetActive(false);
-                    _usableObjects.Push(instance);
+                    progress?.Report(1.0f);
+                    break;
                 }
-            }
-            else if (diffCount <= -1)
-            {
-                // Remove unused objects
-                for (var i = 0; i < -diffCount; i++)
-                {
-                    var obj = _usableObjects.Pop();
-                    Addressables.ReleaseInstance(obj);
-                }
-
-                progress?.Report(1.0f);
             }
 
             _isWarmingUp = false;
@@ -154,23 +174,31 @@ namespace Addler.Runtime.Core.Pooling
         public PooledObject Use()
         {
             if (IsDisposed)
+            {
                 throw new ObjectDisposedException(GetType().Name);
+            }
 
             if (_usableObjects.Count == 0)
+            {
                 throw new InvalidOperationException(
-                    "There are no waiting objects available in ObjectPool. " +
-                    $"You can expand the pool by calling {nameof(Warmup)}.");
+                    "There are no waiting objects available in ObjectPool. "
+                    + $"You can expand the pool by calling {nameof(Warmup)}.");
+            }
 
             if (_isWarmingUp)
+            {
                 throw new InvalidOperationException(
                     $"This operation cannot be performed until the running {nameof(Warmup)} is complete.");
+            }
 
             var instance = _usableObjects.Pop();
 
             // It seems that this instance has been destroyed outside the pool.
             if (instance == null)
+            {
                 throw new InvalidOperationException(
                     "It seems that a GameObject you are trying to use has been destroyed outside the pool.");
+            }
 
             instance.SetActive(true);
             var handle = new PooledObject(this, instance);
@@ -185,14 +213,18 @@ namespace Addler.Runtime.Core.Pooling
         public void Return(PooledObject obj)
         {
             if (IsDisposed)
+            {
                 throw new ObjectDisposedException(GetType().Name);
+            }
 
             var instance = obj.Instance;
 
             // If the returned instance has been destroyed outside the pool, do nothing.
             // InvalidOperationException will be thrown the next time this instance is retrieved from the pool.
             if (instance == null)
+            {
                 return;
+            }
 
             instance.transform.SetParent(Parent.transform);
             instance.SetActive(false);
