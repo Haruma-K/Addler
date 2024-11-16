@@ -58,7 +58,11 @@ namespace Addler.Runtime.Core.LifetimeBinding
         /// <param name="releaseEvent"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static AsyncOperationHandle BindTo(this AsyncOperationHandle self, IReleaseEvent releaseEvent, bool isScene)
+        public static AsyncOperationHandle BindTo(
+            this AsyncOperationHandle self,
+            IReleaseEvent releaseEvent,
+            bool isScene
+        )
         {
             if (releaseEvent == null)
             {
